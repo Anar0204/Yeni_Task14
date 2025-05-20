@@ -10,12 +10,12 @@ namespace ConsoleApp1
     public static class ExtensionMethods
     {
         
-        public static bool Tek( int number)
+        public static bool IsOdd( int number)
         {
             return number % 2 != 0;
         }
 
-        public static bool Cut( int number)
+        public static bool IsEven( int number)
         {
             return number % 2 == 0;
         }
@@ -24,7 +24,7 @@ namespace ConsoleApp1
         {
             for (int i = 0; i < input.Length; i++)
             {
-                if (input[i] >= '0' && input[i] <= '9')
+                if (char.IsDigit(input[i]))
                     return true;
             }
             return false;
@@ -43,7 +43,7 @@ namespace ConsoleApp1
 
         public static int[] GetValueIndexes(string input, char target)
         {
-            if (string.IsNullOrEmpty(input))
+            if (string.IsNullOrWhiteSpace(input))
                 return new int[0];
 
            
@@ -79,7 +79,8 @@ namespace ConsoleApp1
             }
              
 
-            return input.Substring(0, index + 1).Trim();
+
+            return input.Substring(0,index + 1).Trim();
         }
 
         public static string GetSecondWord(string input)
@@ -88,8 +89,15 @@ namespace ConsoleApp1
                 return string.Empty;
 
             
-            string[] words = input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            return words.Length >= 2 ? words[1] : string.Empty;
+            string[] words = input.Split(' ');
+            if(words.Length >= 2)
+            {
+                return words[1];
+            }
+            else
+            {
+                return " ";
+            }
         }
     }
 }
